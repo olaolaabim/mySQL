@@ -194,151 +194,188 @@ SELECT *
   FROM tutorial.billboard_top_100_year_end
  WHERE artist IN ('Taylor Swift', 'Usher', 'Ludacris')
 
-  /*Write a query that shows all of the entries for Elvis and M.C. Hammer*/
+-- Write a query that shows all of the entries for Elvis and M.C. Hammer
 SELECT *
   FROM tutorial.billboard_top_100_year_end
  WHERE "group" IN ('M.C. Hammer', 'Hammer', 'Elvis Presley')
   
   
 -- SQL BETWEEN  
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year_rank BETWEEN 5 AND 10
+ 
+ SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year_rank >= 5 AND year_rank <= 10
+ 
+-- Write a query that shows all top 100 songs from January 1, 1985 through December 31, 1990.
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+WHERE year BETWEEN 1985 AND 1990
 
-  /*Write a query that shows all top 100 songs from January 1, 1985 through December 31, 1990.*/
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  year BETWEEN 1985
-  AND 1990 
-  
-  
 -- SQL IS NULL  
-
-  /*Write a query that shows all of the rows for which song_name is null.*/
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  song_name IS NULL
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE artist IS NULL
+ 
+ -- Write a query that shows all of the rows for which song_name is null.
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE song_name IS NULL
+    
+-- SQL AND  
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2012 AND year_rank <= 10
+ 
+ SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2012
+   AND year_rank <= 10
+   AND "group" ILIKE '%feat%'
+ 
+-- Write a query that surfaces all rows for top-10 hits for which Ludacris is part of the Group.
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year_rank <= 10
+   AND "group" ILIKE '%ludacris%'
   
+-- Write a query that surfaces the top-ranked records in 1990, 2000, and 2010.
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year_rank = 1
+   AND year IN (1990, 2000, 2010)
   
---SQL AND  
-
-  /*Write a query that surfaces all rows for top-10 hits for which Ludacris is part of the Group.*/
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  year_rank <= 10
-  AND "group" ILIKE '%ludacris%' 
-  
-  -- Write a query that surfaces the top-ranked records in 1990, 2000, and 2010.
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  year_rank = 1
-  AND year IN (1990, 2000, 2010) 
-  
-  -- Write a query that lists all songs from the 1960s with "love" in the title.
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  year BETWEEN 1960
-  AND 1969
-  AND song_name ilike '%love%' 
-  
+-- Write a query that lists all songs from the 1960s with "love" in the title.
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year BETWEEN 1960 AND 1969
+   AND song_name ilike '%love%'
   
 -- SQL OR  
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year_rank = 5 OR artist = 'Gotye'
+ 
+ SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2013
+   AND ("group" ILIKE '%macklemore%' OR "group" ILIKE '%timberlake%')
+   
+-- Write a query that returns all rows for top-10 songs that featured either Katy Perry or Bon Jovi.
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+WHERE year_rank <= 10
+AND ("group" ILIKE '%katy perry%' OR "group" ILIKE '%bon jovi%')  
 
-  -- Write a query that returns all rows for top-10 songs that featured either Katy Perry or Bon Jovi.
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  year_rank <= 10
-  AND (
-    "group" ILIKE '%katy perry%'
-    OR "group" ILIKE '%bon jovi%'
-  ) 
+-- Write a query that returns all songs with titles that contain the word "California" in either the 1970s or 1990s.
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+WHERE song_name LIKE '%California%'
+  AND (year BETWEEN 1970 AND 1979 OR year BETWEEN 1990 AND 1999)
   
-  -- Write a query that returns all songs with titles that contain the word "California" in either the 1970s or 1990s.
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  song_name LIKE '%California%'
-  AND (
-    year BETWEEN 1970
-    AND 1979
-    OR year BETWEEN 1990
-    AND 1999
-  ) 
-  
-  -- Write a query that lists all top-100 recordings that feature Dr. Dre before 2001 or after 2009.
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  "group" ILIKE '%dr. dre%'
-  AND (
-    year <= 2000
-    OR year >= 2010
-  ) 
-  
+-- Write a query that lists all top-100 recordings that feature Dr. Dre before 2001 or after 2009.
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE "group" ILIKE '%dr. dre%'
+   AND (year <= 2000 OR year >= 2010)  
   
 -- SQL NOT 
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2013
+   AND year_rank NOT BETWEEN 2 AND 3
 
-  -- Write a query that returns all rows for songs that were on the charts in 2013 and do not contain the letter "a".
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  song_name NOT ILIKE '%a%'
-  AND year = 2013 
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2013
+   AND year_rank <= 3
+
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2013
+   AND "group" NOT ILIKE '%macklemore%'
+   
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2013
+   AND artist IS NOT NULL
+   
+-- Write a query that returns all rows for songs that were on the charts in 2013 and do not contain the letter "a".
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+WHERE song_name NOT ILIKE '%a%'
+AND year = 2013
+
+-- SQL ORDERBY
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ ORDER BY artist
+ 
+ SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2013
+ ORDER BY year_rank
+ 
+ SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2013
+ ORDER BY year_rank DESC
+ 
+ SELECT *
+  FROM tutorial.billboard_top_100_year_end
+  WHERE year_rank <= 3
+ ORDER BY year DESC, year_rank
+ 
+ SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year_rank <= 3
+ ORDER BY year_rank, year DESC
+ 
+ SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year_rank <= 3
+ ORDER BY 2, 1 DESC
+ 
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2010
+ ORDER BY year_rank, artist
+ 
+-- Write a query that returns all rows from 2012, ordered by song title from Z to A.
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2012
+ ORDER BY song_name DESC
+
+-- Write a query that returns all rows from 2010 ordered by rank, with artists ordered alphabetically for each song
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2010
+ ORDER BY year_rank, artist
+
+-- SQL Comment
+SELECT *  -- This comment won't affect the way the code runs
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2013
+
+/* Here's a comment so long and descriptive that
+it could only fit on multiple lines. Fortunately,
+it, too, will not affect how this code runs. */
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2013
+ 
+-- Write a query that shows all rows for which T-Pain was a group member, ordered by rank on the charts, from lowest to highest rank (from 100 to 1).
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE "group" ILIKE '%t-pain%'
+ ORDER BY year_rank DESC
   
-  -- Write a query that returns all rows from 2012, ordered by song title from Z to A.
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  year = 2012
-ORDER BY
-  song_name DESC 
-
-
--- SQL ORDER BY  
-
-  -- Write a query that shows all rows for which T-Pain was a group member, ordered by rank on the charts, from lowest to highest rank (from 100 to 1).
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  "group" ILIKE '%t-pain%'
-ORDER BY
-  year_rank DESC
-  
-  /*Write a query that returns songs that ranked between 10 and 20 (inclusive) in 1993, 2003, or 2013. 
-   Order the results by year and rank, and leave a comment on each line of the WHERE clause to indicate what that line does*/
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  year IN (2013, 2003, 1993) --Select the relevant years
-  AND year_rank BETWEEN 10
-  AND 20 --Limit the rank to 10-20
-ORDER BY
-  year,
-  year_rank
+-- Write a query that returns songs that ranked between 10 and 20 (inclusive) in 1993, 2003, or 2013. Order the results by year and rank, and leave a comment on each line of the WHERE clause to indicate what that line does*/
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year IN (2013, 2003, 1993)  
+   AND year_rank BETWEEN 10 AND 20
+ ORDER BY year, year_rank
