@@ -156,32 +156,48 @@ FROM
   tutorial.us_housing_units
 WHERE
   year >= 2000
-    
--- SQL LIKE  
 
-  /*Write a query that returns all rows for which Ludacris was a member of the group*/
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  "group" LIKE '%Ludacris'
-  /*Write a query that returns all rows for which the first artist listed in the group has a name that begins with "DJ".*/
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  "group" ILIKE 'DJ%'
+
+-- SQL Logical Operators
+SELECT * FROM tutorial.billboard_top_100_year_end
+
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ ORDER BY year DESC, year_rank
+ 
+-- SQL LIKE  
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE "group" LIKE 'Snoop%'
+ 
+ SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE artist ILIKE 'dr_ke'
+
+-- Write a query that returns all rows for which Ludacris was a member of the group
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE artist LIKE '%Ludacris'
+ 
+-- Write a query that returns all rows for which the first artist listed in the group has a name that begins with "DJ".
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE "group" ILIKE 'DJ%'
   
 -- SQL IN  
+
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE year_rank IN (1, 2, 3)
+ 
+ SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE artist IN ('Taylor Swift', 'Usher', 'Ludacris')
+
   /*Write a query that shows all of the entries for Elvis and M.C. Hammer*/
-SELECT
-  *
-FROM
-  tutorial.billboard_top_100_year_end
-WHERE
-  "group" IN ('M.C. Hammer', 'Hammer', 'Elvis Presley')
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE "group" IN ('M.C. Hammer', 'Hammer', 'Elvis Presley')
   
   
 -- SQL BETWEEN  
